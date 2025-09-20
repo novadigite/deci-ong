@@ -50,7 +50,7 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/functions/v1/chat', {
+      const response = await fetch('https://bqrfxeagkawxtsljqtpz.supabase.co/functions/v1/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
