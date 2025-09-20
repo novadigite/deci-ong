@@ -62,9 +62,9 @@ Deno.serve(async (req) => {
       );
     }
 
-    if (amount < 100) {
+    if (amount < 1000) {
       return new Response(
-        JSON.stringify({ error: 'Le montant minimum est de 100 FCFA' }),
+        JSON.stringify({ error: 'Le montant minimum est de 1000 XOF' }),
         {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
