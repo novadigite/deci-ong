@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DonationModal from "@/components/DonationModal";
 import logoDeciImg from "@/assets/logo-deci.jpg";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -49,7 +51,12 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="default" size="sm" className="ml-4">
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="ml-4"
+              onClick={() => setIsDonationModalOpen(true)}
+            >
               Je fais un don
             </Button>
           </div>
@@ -86,7 +93,15 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button variant="default" size="sm" className="w-full">
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    setIsDonationModalOpen(true);
+                    setIsOpen(false);
+                  }}
+                >
                   Je fais un don
                 </Button>
               </div>
@@ -94,6 +109,11 @@ const Navigation = () => {
           </div>
         )}
       </div>
+
+      <DonationModal 
+        isOpen={isDonationModalOpen}
+        onClose={() => setIsDonationModalOpen(false)}
+      />
     </nav>
   );
 };

@@ -10,6 +10,7 @@ import Team from "./pages/Team";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import LegalNotice from "./pages/LegalNotice";
+import DonationSuccess from "./pages/DonationSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/projets" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentions-legales" element={<LegalNotice />} />
+            <Route path="/donation-success" element={<DonationSuccess />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
