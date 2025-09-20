@@ -46,10 +46,10 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose }) => {
     }
 
     const amount = parseInt(formData.amount);
-    if (isNaN(amount) || amount < 100) {
+    if (isNaN(amount) || amount < 1000) {
       toast({
         title: "Erreur",
-        description: "Le montant minimum est de 100 FCFA",
+        description: "Le montant minimum est de 1000 XOF",
         variant: "destructive",
       });
       return;
@@ -119,7 +119,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose }) => {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="amount">Montant (FCFA) *</Label>
+            <Label htmlFor="amount">Montant (XOF) *</Label>
             <div className="grid grid-cols-3 gap-2 mt-2 mb-2">
               {predefinedAmounts.map((amount) => (
                 <Button
@@ -138,7 +138,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose }) => {
               id="amount"
               name="amount"
               type="number"
-              min="100"
+              min="1000"
               value={formData.amount}
               onChange={handleInputChange}
               placeholder="Montant personnalisé"

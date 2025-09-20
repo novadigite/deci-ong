@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Award, BookOpen } from "lucide-react";
 import bannerDeciImg from "@/assets/banner-deci.jpg";
+import DonationModal from "@/components/DonationModal";
 
 const Home = () => {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -18,7 +22,11 @@ const Home = () => {
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
             Engagez-vous avec nous pour un avenir meilleur pour les enfants en Côte d'Ivoire
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg">
+          <Button 
+            size="lg" 
+            className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
+            onClick={() => setIsDonationModalOpen(true)}
+          >
             Je fais un don
           </Button>
         </div>
@@ -109,7 +117,12 @@ const Home = () => {
             Ensemble, nous pouvons faire la différence dans la vie des enfants en Côte d'Ivoire
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="px-8 py-3">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="px-8 py-3"
+              onClick={() => setIsDonationModalOpen(true)}
+            >
               Faire un don
             </Button>
             <Button size="lg" variant="outline" className="px-8 py-3 bg-white/10 border-white text-white hover:bg-white hover:text-primary">
@@ -118,6 +131,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Donation Modal */}
+      <DonationModal 
+        isOpen={isDonationModalOpen} 
+        onClose={() => setIsDonationModalOpen(false)} 
+      />
     </div>
   );
 };

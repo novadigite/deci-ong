@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Users, BookOpen, Shield, Heart, Calendar, MapPin } from "lucide-react";
+import DonationModal from "@/components/DonationModal";
 
 const Projects = () => {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const projects = [
     {
       title: "Conseils Communaux d'Enfants",
@@ -121,7 +124,12 @@ const Projects = () => {
                     <Button variant="default" size="sm" className="flex-1">
                       En savoir plus
                     </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => setIsDonationModalOpen(true)}
+                    >
                       Soutenir ce projet
                     </Button>
                   </div>
@@ -168,6 +176,12 @@ const Projects = () => {
           </Button>
         </div>
       </div>
+
+      {/* Donation Modal */}
+      <DonationModal 
+        isOpen={isDonationModalOpen} 
+        onClose={() => setIsDonationModalOpen(false)} 
+      />
     </div>
   );
 };
