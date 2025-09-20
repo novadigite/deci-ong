@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Mission from "./pages/Mission";
 import Team from "./pages/Team";
 import Projects from "./pages/Projects";
+import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import LegalNotice from "./pages/LegalNotice";
 import DonationSuccess from "./pages/DonationSuccess";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/mission" element={<Mission />} />
             <Route path="/equipe" element={<Team />} />
             <Route path="/projets" element={<Projects />} />
+            <Route path="/galerie" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentions-legales" element={<LegalNotice />} />
             <Route path="/donation-success" element={<DonationSuccess />} />
