@@ -1,5 +1,10 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
+const supabase = createClient(
+  Deno.env.get('SUPABASE_URL') ?? '',
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+);
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -100,6 +105,27 @@ Deno.serve(async (req) => {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         }
       );
+    }
+
+    // Save donation to database
+    const { data: donationData, error: dbError } = await supabase
+      .from('donations')
+      .insert({
+        nom: fullName,
+        email: email,
+        montant: amount,
+        transaction_id: paystackData.data.reference,
+        moyen_paiement: 'Paystack',
+        statut: 'en_attente'
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error('Database error:', dbError);
+      // Continue even if database insert fails - payment can still proceed
+    } else {
+      console.log('Donation saved to database:', donationData);
     }
 
     return new Response(

@@ -40,3 +40,6 @@ enabled = false
 
 [functions.donation]
 verify_jwt = false
+
+[functions.paystack-webhook]
+verify_jwt = false
