@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Heart, Users, Shield, BookOpen } from "lucide-react";
+import { Target, Eye, Heart, Users, Shield, BookOpen, MapPin, UserCheck, Music } from "lucide-react";
 
 const Mission = () => {
   return (
@@ -13,6 +13,104 @@ const Mission = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Découvrez notre engagement pour les droits de l'enfant en Côte d'Ivoire
           </p>
+        </div>
+
+        {/* Présentation de l'ONG */}
+        <div className="mb-16">
+          <Card className="border-l-4 border-l-primary shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-2xl">
+                Présentation de l'ONG DECI
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg leading-relaxed text-muted-foreground mb-4">
+                L'ONG <strong>Droits d'Enfants en Côte d'Ivoire (DECI)</strong> est une organisation non gouvernementale, apolitique et laïque. 
+                Créée en Septembre 2000, elle a été déclarée au ministère de l'intérieur le 28 Juillet 2003 sous le numéro 730 
+                et a reçu son autorisation de déclaration le 29 Avril 2021 sous le numéro 0452/MIS/DCAT/DAG/SDVA.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Informations générales */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl">
+                <MapPin className="h-6 w-6 text-primary mr-3" />
+                Siège Social
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Elle est située à Yopougon Ananeraie
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl">
+                <Target className="h-6 w-6 text-secondary mr-3" />
+                Zone d'intervention
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Elle intervient en milieu scolaire et communautaire en Côte d'Ivoire
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl">
+                <Users className="h-6 w-6 text-humanitarian mr-3" />
+                Bénéficiaires Direct
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Les bénéficiaires directs de ses activités sont les personnes de moins de 18 ans
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl">
+                <UserCheck className="h-6 w-6 text-primary mr-3" />
+                Exécutants
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Les activités de DECI sont exécutées par des personnes de tous âges ayant pour priorité le bien-être de l'enfant.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Canaux de Participation */}
+        <div className="mb-16">
+          <Card className="border-l-4 border-l-secondary shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <Music className="h-8 w-8 text-secondary mr-3" />
+                Canaux de Participation
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Les moins de 18 ans se regroupent au sein des <strong>clubs d'Education aux Droits de l'Homme, 
+                de l'Enfant et la Citoyenneté en milieu scolaire (Club EDHC)</strong> et les <strong>Conseils Communaux 
+                d'Enfants (CCE)</strong> dans la commune pour promouvoir les droits de l'homme, de l'Enfant et la Citoyenneté. 
+                La musique, le théâtre, le dessin, les causeries de groupes et bien d'autres canaux d'expressions sont utilisés 
+                par les enfants et adolescents.
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Mission Section */}
@@ -46,10 +144,8 @@ const Mission = () => {
             </CardHeader>
             <CardContent>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                Nous aspirons à <strong>contribuer à faire de la Côte d'Ivoire une nation</strong> 
-                où la participation des enfants dans toutes les décisions qui les concernent 
-                est une réalité. Un pays où chaque enfant grandit dans la dignité, 
-                la sécurité et avec les opportunités de s'épanouir pleinement.
+                Nous rêvons d'une <strong>Côte d'Ivoire où les enfants, adolescents et jeunes volontaires 
+                sont soutenus et participent pleinement aux actions citoyennes.</strong>
               </p>
             </CardContent>
           </Card>
