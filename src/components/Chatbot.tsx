@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import DonationModal from "@/components/DonationModal";
 
 interface Message {
   id: string;
@@ -15,6 +16,7 @@ interface Message {
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -85,6 +87,16 @@ const Chatbot = () => {
       };
 
       setMessages(prev => [...prev, botMessage]);
+
+      // Vérifier si la réponse contient une invitation à faire un don
+      if (data.response.includes('OPEN_DONATION_MODAL')) {
+        const cleanedResponse = data.response.replace('OPEN_DONATION_MODAL', '').trim();
+        botMessage.text = cleanedResponse;
+        setMessages(prev => prev.map(msg => msg.id === botMessage.id ? botMessage : msg));
+        setTimeout(() => {
+          setIsDonationModalOpen(true);
+        }, 1000);
+      }
     } catch (error) {
       console.error('Chat error:', error);
       toast({
@@ -260,6 +272,12 @@ const Chatbot = () => {
           )}
         </div>
       )}
+
+      {/* Modal de donation */}
+      <DonationModal 
+        isOpen={isDonationModalOpen} 
+        onClose={() => setIsDonationModalOpen(false)} 
+      />
     </>
   );
 };

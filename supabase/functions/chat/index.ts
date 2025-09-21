@@ -49,6 +49,15 @@ const ongDeciKnowledgeBase = {
 // Fonction de recherche sémantique simple
 function findBestMatch(query: string): string {
   const queryLower = query.toLowerCase()
+  
+  // Détecter les demandes de don
+  const donationKeywords = ['don', 'donation', 'donner', 'contribuer', 'contribution', 'soutenir', 'aide financière', 'financer', 'participer financièrement', 'comment aider', 'comment soutenir']
+  const isDonationQuery = donationKeywords.some(keyword => queryLower.includes(keyword))
+  
+  if (isDonationQuery) {
+    return `OPEN_DONATION_MODAL Merci de votre intérêt pour soutenir l'ONG DECI ! Nous avons mis en place un système de don sécurisé pour vous permettre de contribuer facilement à nos actions en faveur des enfants en Côte d'Ivoire. Je vais ouvrir le formulaire de donation pour vous.`
+  }
+  
   let bestMatch = ''
   let bestScore = 0
   
@@ -173,7 +182,7 @@ CONSEILS COMMUNAUX D'ENFANTS : Structures de participation créées pour permett
 
 INSTRUCTIONS :
 1. Ton : Bienveillant, clair et professionnel
-2. Si on te demande des dons : "Pour faire un don et soutenir nos actions, visitez notre page dédiée ou contactez-nous directement."
+2. Si on te demande des dons ou comment soutenir financièrement : Tu DOIS commencer ta réponse par "OPEN_DONATION_MODAL" puis expliquer que tu vas ouvrir le formulaire de donation sécurisé.
 3. Si on te demande des contacts/partenariats : "Pour nous contacter ou discuter d'un partenariat, rendez-vous sur notre page contact."
 4. Si la question sort du cadre (ONG, enfants, dons, contacts) : Donne une réponse courte puis recentre sur la mission de l'ONG
 5. Réponds en français
