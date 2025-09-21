@@ -43,3 +43,6 @@ verify_jwt = false
 
 [functions.paystack-webhook]
 verify_jwt = false
+
+[functions.chat]
+verify_jwt = false
