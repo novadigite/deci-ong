@@ -9,57 +9,48 @@ const Projects = () => {
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const projects = [
     {
-      title: "Conseils Communaux d'Enfants",
-      description: "Création et accompagnement de 25 Conseils Communaux d'Enfants dans différentes régions de Côte d'Ivoire pour permettre aux enfants de participer aux décisions locales.",
-      icon: Users,
+      title: "Éducation et Savoir",
+      description: "Favoriser l'accès à l'éducation pour tous les enfants.",
+      icon: BookOpen,
+      status: "En cours",
+      beneficiaries: "3000+ enfants",
+      location: "National",
+      color: "primary"
+    },
+    {
+      title: "Santé et Bien-être",
+      description: "Améliorer les conditions de santé des jeunes en Côte d'Ivoire.",
+      icon: Heart,
       status: "En cours",
       beneficiaries: "2500+ enfants",
       location: "National",
-      color: "primary"
-    },
-    {
-      title: "Formation aux Droits de l'Enfant",
-      description: "Programme de formation continue destiné aux leaders communautaires, enseignants et parents sur les droits fondamentaux de l'enfant.",
-      icon: BookOpen,
-      status: "Permanent",
-      beneficiaries: "5000+ adultes",
-      location: "Abidjan, Bouaké, San Pedro",
       color: "secondary"
     },
     {
-      title: "Protection contre les Violences",
-      description: "Initiative de prévention et de lutte contre toutes formes de violences faites aux enfants, incluant un système d'alerte et d'accompagnement.",
+      title: "Protection Juridique",
+      description: "Soutenir les droits légaux des enfants à travers des projets.",
       icon: Shield,
       status: "En cours",
-      beneficiaries: "1200+ enfants",
-      location: "Zones rurales",
+      beneficiaries: "1500+ enfants",
+      location: "National",
       color: "humanitarian"
     },
     {
-      title: "Santé et Nutrition Infantile",
-      description: "Programme de sensibilisation et d'accompagnement pour améliorer l'état nutritionnel et sanitaire des enfants en milieu rural.",
-      icon: Heart,
-      status: "En cours",
-      beneficiaries: "800+ enfants",
-      location: "Nord Côte d'Ivoire",
+      title: "Sensibilisation Communautaire",
+      description: "Informer les familles sur les droits des enfants.",
+      icon: Users,
+      status: "Permanent",
+      beneficiaries: "5000+ familles",
+      location: "National",
       color: "primary"
     },
     {
-      title: "Éducation Inclusive",
-      description: "Projet visant à garantir l'accès à une éducation de qualité pour tous les enfants, y compris ceux en situation de handicap.",
-      icon: BookOpen,
-      status: "Planifié",
-      beneficiaries: "3000+ enfants",
-      location: "National",
-      color: "secondary"
-    },
-    {
-      title: "Participation Citoyenne des Jeunes",
-      description: "Formation de jeunes leaders pour qu'ils deviennent des ambassadeurs des droits de l'enfant dans leurs communautés.",
-      icon: Users,
+      title: "Protection Enfant",
+      description: "Projets humanitaires pour les droits des enfants en Côte d'Ivoire.",
+      icon: Shield,
       status: "En cours",
-      beneficiaries: "500+ jeunes",
-      location: "Abidjan, Yamoussoukro",
+      beneficiaries: "4000+ enfants",
+      location: "National",
       color: "humanitarian"
     }
   ];
