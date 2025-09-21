@@ -52,10 +52,27 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      donation_stats: {
+        Row: {
+          average_amount: number | null
+          month: string | null
+          moyen_paiement: string | null
+          statut: string | null
+          total_amount: number | null
+          total_donations: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      can_view_donation: {
+        Args: { donation_email: string }
+        Returns: boolean
+      }
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
