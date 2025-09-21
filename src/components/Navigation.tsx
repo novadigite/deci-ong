@@ -23,18 +23,18 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+    <nav className="bg-card/80 backdrop-blur-lg border-b border-border sticky top-0 z-50 shadow-lg hover-glow transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 group hover-lift transition-all duration-300">
             <img 
               src={logoDeciImg} 
               alt="Logo ONG DECI" 
-              className="h-12 w-12 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 hover-glow"
             />
             <div>
-              <h1 className="text-xl font-bold text-primary">ONG DECI</h1>
-              <p className="text-xs text-muted-foreground">Droits d'Enfants en Côte d'Ivoire</p>
+              <h1 className="text-xl font-bold text-primary group-hover:animate-text-shimmer transition-all duration-300">ONG DECI</h1>
+              <p className="text-xs text-muted-foreground group-hover:text-primary/70 transition-colors duration-300">Droits d'Enfants en Côte d'Ivoire</p>
             </div>
           </Link>
 
@@ -44,11 +44,11 @@ const Navigation = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`transition-colors duration-200 ${
+                className={`relative px-3 py-2 rounded-md transition-all duration-300 hover-lift ${
                   isActive(item.path)
-                    ? "text-primary font-medium"
-                    : "text-foreground hover:text-primary"
-                }`}
+                    ? "text-primary font-bold bg-primary-light/20 animate-glow-pulse"
+                    : "text-foreground hover:text-primary hover:bg-primary-light/10 hover:scale-105"
+                } after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:transform after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full`}
               >
                 {item.name}
               </Link>
@@ -56,7 +56,7 @@ const Navigation = () => {
             <Button 
               variant="default" 
               size="sm" 
-              className="ml-4"
+              className="ml-4 hover-lift hover-glow animate-glow-pulse font-bold shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
               onClick={() => setIsDonationModalOpen(true)}
             >
               Je fais un don
