@@ -73,17 +73,7 @@ export type Database = {
       }
     }
     Views: {
-      donation_stats: {
-        Row: {
-          average_amount: number | null
-          month: string | null
-          moyen_paiement: string | null
-          statut: string | null
-          total_amount: number | null
-          total_donations: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       can_view_donation: {
