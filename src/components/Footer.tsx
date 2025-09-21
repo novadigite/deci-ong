@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import logoDeciImg from "@/assets/logo-deci.jpg";
+import { useState } from "react";
+import DonationModal from "./DonationModal";
 
 const Footer = () => {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   return (
     <footer className="bg-foreground text-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -25,7 +29,11 @@ const Footer = () => {
               Engagez-vous avec nous pour un avenir meilleur pour les enfants en Côte d'Ivoire. 
               Ensemble, protégeons et promouvons les droits de l'enfant.
             </p>
-            <Button variant="secondary" size="sm">
+            <Button 
+              variant="secondary" 
+              size="sm"
+              onClick={() => setIsDonationModalOpen(true)}
+            >
               Faire un don maintenant
             </Button>
           </div>
@@ -66,14 +74,41 @@ const Footer = () => {
             
             {/* Social Media */}
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-muted hover:text-primary transition-colors">
+              <a 
+                href="https://web.facebook.com/ONGDECI?_rdc=1&_rdr" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted hover:text-primary transition-colors"
+                aria-label="Suivez-nous sur Facebook"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted hover:text-primary transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted hover:text-primary transition-colors">
+              <a 
+                href="https://www.instagram.com/ong_deci/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted hover:text-primary transition-colors"
+                aria-label="Suivez-nous sur Instagram"
+              >
                 <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@ongdeci2915" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted hover:text-primary transition-colors"
+                aria-label="Suivez-nous sur YouTube"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@ong.deci" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted hover:text-primary transition-colors"
+                aria-label="Suivez-nous sur TikTok"
+              >
+                <FaTiktok className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -90,6 +125,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      
+      <DonationModal
+        isOpen={isDonationModalOpen}
+        onClose={() => setIsDonationModalOpen(false)}
+      />
     </footer>
   );
 };
