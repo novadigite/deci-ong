@@ -14,6 +14,7 @@ interface Message {
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -26,6 +27,18 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  // Détection mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -92,36 +105,39 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {isOpen ? (
-        <Card className="w-80 h-96 shadow-xl border-2 border-primary/20">
-          <div className="flex items-center justify-between p-3 bg-primary text-white rounded-t-lg">
-            <div className="flex items-center gap-2">
-              <MessageCircle className="h-5 w-5" />
-              <span className="font-semibold">Assistant DECI</span>
+    <>
+      {/* Version mobile plein écran */}
+      {isOpen && isMobile ? (
+        <div className="fixed inset-0 z-50 bg-background animate-slide-up">
+          <div className="flex flex-col h-full">
+            {/* Header mobile */}
+            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary to-primary/90 text-white shadow-lg">
+              <div className="flex items-center gap-3">
+                <MessageCircle className="h-6 w-6 animate-float" />
+                <span className="font-bold text-lg">Assistant DECI</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(false)}
+                className="h-10 w-10 text-white hover:bg-white/20 hover-lift transition-all duration-300"
+              >
+                <X className="h-6 w-6" />
+              </Button>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-              className="h-6 w-6 text-white hover:bg-white/20"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          <CardContent className="p-0 h-full flex flex-col">
-            <div className="flex-1 overflow-y-auto p-3 space-y-3">
+            
+            {/* Messages mobile */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-background to-muted/20">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                  className={`flex ${message.isBot ? 'justify-start' : 'justify-end'} animate-slide-up`}
                 >
                   <div
-                    className={`max-w-[75%] p-2 rounded-lg text-sm ${
+                    className={`max-w-[85%] p-4 rounded-2xl text-base leading-relaxed shadow-lg hover-lift transition-all duration-300 ${
                       message.isBot
-                        ? 'bg-muted text-foreground'
-                        : 'bg-primary text-white'
+                        ? 'bg-gradient-to-br from-card to-card/80 text-foreground border-2 border-primary/10'
+                        : 'bg-gradient-to-br from-primary to-primary/90 text-white'
                     }`}
                   >
                     {message.text}
@@ -129,48 +145,122 @@ const Chatbot = () => {
                 </div>
               ))}
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-muted p-2 rounded-lg flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span className="text-sm text-muted-foreground">L'assistant réfléchit...</span>
+                <div className="flex justify-start animate-bounce-in">
+                  <div className="bg-gradient-to-br from-card to-card/80 p-4 rounded-2xl flex items-center gap-3 border-2 border-primary/10 shadow-lg">
+                    <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                    <span className="text-base text-muted-foreground">L'assistant réfléchit...</span>
                   </div>
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
             
-            <div className="p-3 border-t">
-              <div className="flex gap-2">
+            {/* Input mobile */}
+            <div className="p-4 border-t bg-card/50 backdrop-blur-sm">
+              <div className="flex gap-3">
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Tapez votre message..."
                   disabled={isLoading}
-                  className="text-sm"
+                  className="text-base h-12 bg-background border-2 border-primary/20 focus:border-primary/40 rounded-xl transition-all duration-300"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={isLoading || !inputValue.trim()}
                   size="icon"
-                  className="h-9 w-9"
+                  className="h-12 w-12 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-xl rounded-xl transition-all duration-300"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="h-6 w-6" />
                 </Button>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       ) : (
-        <Button
-          onClick={() => setIsOpen(true)}
-          size="lg"
-          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-primary hover:bg-primary/90"
-        >
-          <MessageCircle className="h-6 w-6 text-white" />
-        </Button>
+        /* Version desktop et bouton */
+        <div className="fixed bottom-4 right-4 z-50">
+          {isOpen ? (
+            <Card className="w-80 sm:w-96 h-[28rem] sm:h-[32rem] lg:h-[36rem] shadow-2xl border-2 border-primary/20 animate-bounce-in backdrop-blur-sm">
+              <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-primary to-primary/90 text-white rounded-t-lg">
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 animate-float" />
+                  <span className="font-semibold text-sm sm:text-base">Assistant DECI</span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(false)}
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-white hover:bg-white/20 hover-lift transition-all duration-300"
+                >
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </div>
+              
+              <CardContent className="p-0 h-full flex flex-col">
+                <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.isBot ? 'justify-start' : 'justify-end'} animate-slide-up`}
+                    >
+                      <div
+                        className={`max-w-[85%] sm:max-w-[75%] p-3 rounded-xl text-sm sm:text-base leading-relaxed shadow-sm hover-lift transition-all duration-300 ${
+                          message.isBot
+                            ? 'bg-gradient-to-br from-muted to-muted/80 text-foreground border border-border/50'
+                            : 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-lg'
+                        }`}
+                      >
+                        {message.text}
+                      </div>
+                    </div>
+                  ))}
+                  {isLoading && (
+                    <div className="flex justify-start animate-bounce-in">
+                      <div className="bg-gradient-to-br from-muted to-muted/80 p-3 rounded-xl flex items-center gap-3 border border-border/50 hover-lift">
+                        <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin text-primary" />
+                        <span className="text-sm sm:text-base text-muted-foreground">L'assistant réfléchit...</span>
+                      </div>
+                    </div>
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
+                
+                <div className="p-3 sm:p-4 border-t bg-gradient-to-r from-background to-muted/20">
+                  <div className="flex gap-2 sm:gap-3">
+                    <Input
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Tapez votre message..."
+                      disabled={isLoading}
+                      className="text-sm sm:text-base h-10 sm:h-11 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 transition-all duration-300"
+                    />
+                    <Button
+                      onClick={sendMessage}
+                      disabled={isLoading || !inputValue.trim()}
+                      size="icon"
+                      className="h-10 w-10 sm:h-11 sm:w-11 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-lg transition-all duration-300"
+                    >
+                      <Send className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Button
+              onClick={() => setIsOpen(true)}
+              size="lg"
+              className="rounded-full h-12 w-12 sm:h-14 sm:w-14 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary animate-glow-pulse hover-lift"
+            >
+              <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-float" />
+            </Button>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
