@@ -4,7 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Play, Calendar, MapPin, Users } from "lucide-react";
+import { Play, Calendar, MapPin, Users, ExternalLink } from "lucide-react";
+
+// Import des nouvelles images
+import deci1Img from "@/assets/gallery/deci1.jpg";
+import deci2Img from "@/assets/gallery/deci2.jpg";
+import deci3Img from "@/assets/gallery/deci3.jpg";
+import deci4Img from "@/assets/gallery/deci4.jpg";
+import deci5Img from "@/assets/gallery/deci5.jpg";
 
 const Gallery = () => {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
@@ -12,6 +19,56 @@ const Gallery = () => {
   const images = [
     {
       id: 1,
+      url: deci1Img,
+      title: "Formation et Leadership des Jeunes",
+      description: "Jeune leader participant à une formation sur les droits de l'enfant",
+      date: "2024-03-15",
+      location: "Abidjan",
+      participants: 25,
+      category: "Formation"
+    },
+    {
+      id: 2,
+      url: deci2Img,
+      title: "Conférence sur la Participation Citoyenne",
+      description: "Présentation sur l'importance de la participation des enfants",
+      date: "2024-02-20",
+      location: "Yamoussoukro",
+      participants: 80,
+      category: "Conférence"
+    },
+    {
+      id: 3,
+      url: deci3Img,
+      title: "Assemblée Générale des Conseils d'Enfants",
+      description: "Réunion annuelle des représentants des Conseils Communaux d'Enfants",
+      date: "2024-01-10",
+      location: "Bouaké",
+      participants: 150,
+      category: "Assemblée"
+    },
+    {
+      id: 4,
+      url: deci4Img,
+      title: "Rencontre avec les Autorités",
+      description: "Dialogue entre les leaders DECI et les autorités locales",
+      date: "2024-02-05",
+      location: "Abidjan",
+      participants: 15,
+      category: "Événement"
+    },
+    {
+      id: 5,
+      url: deci5Img,
+      title: "Session de Formation des Formateurs",
+      description: "Formation destinée aux encadreurs des Conseils Communaux d'Enfants",
+      date: "2024-03-01",
+      location: "Abidjan",
+      participants: 35,
+      category: "Formation"
+    },
+    {
+      id: 6,
       url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800",
       title: "Formation des Conseils Communaux d'Enfants",
       description: "Session de formation avec les jeunes représentants",
@@ -21,7 +78,7 @@ const Gallery = () => {
       category: "Formation"
     },
     {
-      id: 2,
+      id: 7,
       url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800",
       title: "Journée des Droits de l'Enfant",
       description: "Célébration de la journée internationale des droits de l'enfant",
@@ -31,7 +88,7 @@ const Gallery = () => {
       category: "Événement"
     },
     {
-      id: 3,
+      id: 8,
       url: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800",
       title: "Ateliers de sensibilisation",
       description: "Sensibilisation dans les écoles sur les droits des enfants",
@@ -41,7 +98,7 @@ const Gallery = () => {
       category: "Sensibilisation"
     },
     {
-      id: 4,
+      id: 9,
       url: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800",
       title: "Assemblée Générale FENACCE-CI",
       description: "Réunion de la Fédération Nationale des Conseils Communaux d'Enfants",
@@ -51,7 +108,7 @@ const Gallery = () => {
       category: "Assemblée"
     },
     {
-      id: 5,
+      id: 10,
       url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800",
       title: "Programme de mentorat",
       description: "Accompagnement des jeunes leaders",
@@ -61,7 +118,7 @@ const Gallery = () => {
       category: "Mentorat"
     },
     {
-      id: 6,
+      id: 11,
       url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800",
       title: "Conférence sur la participation des enfants",
       description: "Conférence nationale sur la participation des enfants aux décisions",
@@ -236,6 +293,22 @@ const Gallery = () => {
                     </DialogContent>
                   </Dialog>
                 ))}
+              </div>
+              
+              {/* Bouton Voir plus */}
+              <div className="text-center mt-12">
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="px-8 py-3"
+                  onClick={() => window.open('https://web.facebook.com/ONGDECI/photos', '_blank')}
+                >
+                  <ExternalLink className="h-5 w-5 mr-2" />
+                  Voir plus de photos sur Facebook
+                </Button>
+                <p className="text-muted-foreground text-sm mt-2">
+                  Découvrez toutes nos activités en images
+                </p>
               </div>
             </TabsContent>
 
