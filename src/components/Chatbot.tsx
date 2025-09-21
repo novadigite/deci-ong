@@ -157,20 +157,20 @@ const Chatbot = () => {
             
             {/* Input mobile */}
             <div className="p-4 border-t bg-card/50 backdrop-blur-sm">
-              <div className="flex gap-3">
+              <div className="flex gap-2 items-center">
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Tapez votre message..."
                   disabled={isLoading}
-                  className="text-base h-12 bg-background border-2 border-primary/20 focus:border-primary/40 rounded-xl transition-all duration-300"
+                  className="flex-1 text-base h-12 bg-background border-2 border-primary/20 focus:border-primary/40 rounded-xl transition-all duration-300"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={isLoading || !inputValue.trim()}
                   size="icon"
-                  className="h-12 w-12 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-xl rounded-xl transition-all duration-300"
+                  className="h-12 w-12 shrink-0 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-xl rounded-xl transition-all duration-300"
                 >
                   <Send className="h-6 w-6" />
                 </Button>
@@ -228,20 +228,20 @@ const Chatbot = () => {
                 </div>
                 
                 <div className="p-3 sm:p-4 border-t bg-gradient-to-r from-background to-muted/20">
-                  <div className="flex gap-2 sm:gap-3">
+                  <div className="flex gap-2 items-center">
                     <Input
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Tapez votre message..."
                       disabled={isLoading}
-                      className="text-sm sm:text-base h-10 sm:h-11 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 transition-all duration-300"
+                      className="flex-1 text-sm sm:text-base h-10 sm:h-11 bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 transition-all duration-300"
                     />
                     <Button
                       onClick={sendMessage}
                       disabled={isLoading || !inputValue.trim()}
                       size="icon"
-                      className="h-10 w-10 sm:h-11 sm:w-11 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-lg transition-all duration-300"
+                      className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary hover-lift shadow-lg transition-all duration-300"
                     >
                       <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                     </Button>
