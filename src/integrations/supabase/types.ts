@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      donation_public_stats: {
+        Row: {
+          id: string
+          last_updated: string | null
+          total_amount: number | null
+          total_donations: number | null
+        }
+        Insert: {
+          id?: string
+          last_updated?: string | null
+          total_amount?: number | null
+          total_donations?: number | null
+        }
+        Update: {
+          id?: string
+          last_updated?: string | null
+          total_amount?: number | null
+          total_donations?: number | null
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           created_at: string
@@ -72,6 +93,10 @@ export type Database = {
       is_admin_user: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      update_donation_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
     }
     Enums: {
