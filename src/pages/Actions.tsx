@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Heart, Users, BookOpen, Shield, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 import DonationModal from "@/components/DonationModal";
 
 const Actions = () => {
@@ -15,6 +17,7 @@ const Actions = () => {
     email: "",
     message: ""
   });
+  const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,7 +30,17 @@ const Actions = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
-    console.log("Form submitted:", formData);
+    toast({
+      title: "Message envoyé !",
+      description: "Nous avons bien reçu votre message et vous recontacterons bientôt.",
+    });
+    
+    // Reset form
+    setFormData({
+      firstName: "",
+      email: "",
+      message: ""
+    });
   };
 
   const actions = [
@@ -36,21 +49,24 @@ const Actions = () => {
       description: "Découvrez les projets menés par l'ONG Deci pour aider.",
       icon: BookOpen,
       color: "primary",
-      action: "Découvrir"
+      action: "Découvrir",
+      link: "/projets"
     },
     {
       title: "Projets ONG",
       description: "Soutenez nos initiatives pour un changement positif durable.",
       icon: Heart,
       color: "secondary",
-      action: "Soutenir"
+      action: "Soutenir",
+      onClick: () => setIsDonationModalOpen(true)
     },
     {
       title: "Impact Social",
       description: "Participez à nos actions pour améliorer la vie communautaire.",
       icon: Users,
       color: "humanitarian",
-      action: "Agir"
+      action: "Agir",
+      link: "/contact"
     }
   ];
 
@@ -134,12 +150,25 @@ const Actions = () => {
                     <p className="text-muted-foreground mb-6">
                       {action.description}
                     </p>
-                    <Button 
-                      variant="outline" 
-                      className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
-                    >
-                      {action.action}
-                    </Button>
+                    {action.link ? (
+                      <Button 
+                        variant="outline" 
+                        className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
+                        asChild
+                      >
+                        <Link to={action.link}>
+                          {action.action}
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button 
+                        variant="outline" 
+                        className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
+                        onClick={action.onClick}
+                      >
+                        {action.action}
+                      </Button>
+                    )}
                   </CardContent>
                 </Card>
               );

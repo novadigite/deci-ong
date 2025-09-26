@@ -315,7 +315,13 @@ const Gallery = () => {
             <TabsContent value="videos">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredVideos.map((video) => (
-                  <Card key={video.id} className="cursor-pointer hover:shadow-lg transition-shadow group">
+                  <Card 
+                    key={video.id} 
+                    className="cursor-pointer hover:shadow-lg transition-shadow group"
+                    onClick={() => {
+                      window.open('https://www.youtube.com/@ongdeci2915', '_blank');
+                    }}
+                  >
                     <div className="relative overflow-hidden rounded-t-lg">
                       <img
                         src={video.thumbnail}
@@ -348,6 +354,22 @@ const Gallery = () => {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+              
+              {/* Bouton Voir plus de vidéos */}
+              <div className="text-center mt-12">
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="px-8 py-3"
+                  onClick={() => window.open('https://www.youtube.com/@ongdeci2915', '_blank')}
+                >
+                  <ExternalLink className="h-5 w-5 mr-2" />
+                  Voir plus de vidéos sur YouTube
+                </Button>
+                <p className="text-muted-foreground text-sm mt-2">
+                  Découvrez toutes nos activités en vidéos
+                </p>
               </div>
             </TabsContent>
           </Tabs>

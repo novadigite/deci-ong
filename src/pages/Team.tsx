@@ -2,9 +2,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import martialTohaImage from "@/assets/martial-toha.webp";
 
 const Team = () => {
+  const { toast } = useToast();
 
   return (
     <div className="min-h-screen py-16">
@@ -150,7 +152,16 @@ const Team = () => {
                 Formulaire de contact
               </Link>
             </Button>
-            <Button size="lg" variant="outline">
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => {
+                toast({
+                  title: "Merci de votre intérêt !",
+                  description: "Pour devenir bénévole, veuillez nous contacter via notre formulaire de contact.",
+                });
+              }}
+            >
               Devenir bénévole
             </Button>
           </div>

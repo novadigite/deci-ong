@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Award, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 import bannerDeciImg from "@/assets/banner-deci.jpg";
 import DonationModal from "@/components/DonationModal";
 
@@ -150,8 +151,11 @@ const Home = () => {
               size="lg" 
               variant="outline" 
               className="px-10 py-4 text-lg font-semibold bg-white/10 border-2 border-white text-white hover:bg-white hover:text-primary animate-bounce-in delay-400 hover-lift transition-all duration-300 backdrop-blur-sm"
+              asChild
             >
-              Nous contacter
+              <Link to="/contact">
+                Nous contacter
+              </Link>
             </Button>
           </div>
         </div>

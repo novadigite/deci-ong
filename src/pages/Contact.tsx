@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import DonationModal from "@/components/DonationModal";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const Contact = () => {
     subject: "",
     message: ""
   });
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -188,13 +190,38 @@ const Contact = () => {
                 <CardTitle className="text-xl">Actions rapides</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button variant="default" size="lg" className="w-full">
+                <Button 
+                  variant="default" 
+                  size="lg" 
+                  className="w-full"
+                  onClick={() => setIsDonationModalOpen(true)}
+                >
                   Faire un don
                 </Button>
-                <Button variant="outline" size="lg" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full"
+                  onClick={() => {
+                    toast({
+                      title: "Information",
+                      description: "Pour devenir bénévole, contactez-nous via le formulaire ci-contre ou par téléphone.",
+                    });
+                  }}
+                >
                   Devenir bénévole
                 </Button>
-                <Button variant="outline" size="lg" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full"
+                  onClick={() => {
+                    toast({
+                      title: "Partenariat",
+                      description: "Merci de votre intérêt ! Veuillez nous contacter via le formulaire pour discuter d'un partenariat.",
+                    });
+                  }}
+                >
                   Partenariat
                 </Button>
               </CardContent>
@@ -240,6 +267,12 @@ const Contact = () => {
           </Card>
         </div>
       </div>
+      
+      {/* Donation Modal */}
+      <DonationModal 
+        isOpen={isDonationModalOpen} 
+        onClose={() => setIsDonationModalOpen(false)} 
+      />
     </div>
   );
 };
