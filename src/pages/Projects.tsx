@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Users, BookOpen, Shield, Heart, Calendar, MapPin } from "lucide-react";
 import DonationModal from "@/components/DonationModal";
+import { useToast } from "@/hooks/use-toast";
 
 const Projects = () => {
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+  const { toast } = useToast();
   const projects = [
     {
       title: "Éducation et Savoir",
@@ -112,7 +115,17 @@ const Projects = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button variant="default" size="sm" className="flex-1">
+                    <Button 
+                      variant="default" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        toast({
+                          title: "Information",
+                          description: `Plus d'informations sur "${project.title}" seront bientôt disponibles. Contactez-nous pour en savoir plus !`,
+                        });
+                      }}
+                    >
                       En savoir plus
                     </Button>
                     <Button 
@@ -162,8 +175,14 @@ const Projects = () => {
             Nos projets sont rendus possibles grâce au soutien de nos partenaires 
             institutionnels, organisations internationales et donateurs privés.
           </p>
-          <Button size="lg" variant="default">
-            Devenir partenaire
+          <Button 
+            size="lg" 
+            variant="default"
+            asChild
+          >
+            <Link to="/contact">
+              Devenir partenaire
+            </Link>
           </Button>
         </div>
       </div>
