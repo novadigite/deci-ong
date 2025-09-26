@@ -75,7 +75,7 @@ const Footer = () => {
             {/* Social Media */}
             <div className="flex space-x-4 mt-6">
               <a 
-                href="https://web.facebook.com/ONGDECI?_rdc=1&_rdr" 
+                href="https://web.facebook.com/ONGDECI/tv?locale=fr_FR" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted hover:text-primary transition-colors"
